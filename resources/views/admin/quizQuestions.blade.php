@@ -184,7 +184,6 @@ $(document).ready(function() {
 
 
 
-               // Get the current URL
 let url = window.location.href;
 
 // Split the URL by "/"
