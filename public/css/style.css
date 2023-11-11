@@ -8356,3 +8356,24 @@ a[data-toggle="collapse"] {
 
 .subscribe-form .form-control {
   background: #4897fc; }
+
+
+
+  /* custom css #0d0f93
+   */
+
+.admincontainer{
+  margin-top: 15%;
+}
+
+  .profileImg img{
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    border: 5px solid #0d0f93;
+  }
+
+     hr{
+    height: 2px;
+    background: linear-gradient(to right, #3471db , #af67d3);
+  }

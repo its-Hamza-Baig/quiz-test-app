@@ -29,14 +29,16 @@
     </thead>
     <tbody>
         @if(count($studentdata) > 0)
-        {{-- {{$studentdata}} --}}
+        @php
+            $id = 1;
+        @endphp
         @foreach($studentdata as $student)
             <tr>
-            <td>{{$student->id}}</td>
+            <td>{{$id++}}</td>
             <td>{{ $student->username}}</td>
             <td>{{ $student->email}}</td>
             <td>{{ $student['classname'][0]['class']}}</td>
-            <td><button class="btn btn-success btn-sm">Results</button></td>
+            <td><a href="/admin/student/result/{{$student->id}}"  class="btn btn-success btn-sm">Results</a></td>
             <td>
                 <button class="btn btn-sm btn-danger delete-button" data-toggle="modal" data-target="#deletestudentmodel" data-id="{{$student->id}}">Delete</button>
             </td>
@@ -137,15 +139,7 @@
 
         });
     });
-// console.log($classesList);
-// console.log($studentdata);
-//     document.addEventListener('DOMContentLoaded', function(){
-//     document.getElementById('addStudentButton').addEventListener('click', function(){
-//         // window.location.href = "{{ route('add-student-model') }}"; // Add double curly braces around route
-// console.log($classesList);
 
-//     });
-// });
 
   </script>
 

@@ -24,7 +24,7 @@ public function register(Request $request){
     // Validate request data
     $validator = Validator::make($request->all(), [
         "username" => "string|required",
-        "email" => "email|required|unique:users", // Check for unique email
+        "email" => "email|required|unique:users",
         "password" => "required|string"
     ]);
 
@@ -87,29 +87,6 @@ public function register(Request $request){
             return back()->withErrors('User Not found!');
         }
     }
-
-
-    // public function userlogin(Request $request){
-    //     $request->validate([
-    //         "email" => "email|required",
-    //         "password" => "required|string"
-    //     ]);
-    
-    //     $userCridential = $request->only('email','password');
-    
-    //     if(Auth::attempt($userCridential)){
-    //         if(Auth::user()->role=='superAdmin'){
-    //             return redirect('/super-admin/dashboard');
-    //         } elseif(Auth::user()->role=='admin'){
-    //             return redirect('/admin/dashboard');
-    //         } elseif(Auth::students()->role=='student'){ // Corrected this line
-    //             return redirect('/student/dashboard');
-    //         }
-    //     } else {
-    //         return back()->withErrors('User Not found!');
-    //     }
-    // }
-    
 
 
     public function logout(Request $request){

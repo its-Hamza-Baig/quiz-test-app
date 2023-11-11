@@ -1,10 +1,10 @@
-@extends('layouts.student-layout')
-@section('student-content-area')
-    <!-- Page Content  -->
-    <h2 class="mb-4">Quiz </h2>
+@extends('layouts.admin-layout')
+@section('admin-content-area')
+<h2>Quiz name</h2>
+
 
     
-  <table class="table mt-5">
+<table class="table mt-5">
     <thead class="thead-dark">
       <tr>
         <th scope="col">Id</th>
@@ -13,9 +13,9 @@
       </tr>
     </thead>
     <tbody>
-        @if (count($examQuestions) > 0)
+        @if (count($examqs) > 0)
 
-        @foreach ($examQuestions as $question )
+        @foreach ($examqs as $question )
             
         <tr>
             <td class="row-number"></td>
@@ -68,21 +68,20 @@
 
 
 
-    <script>
-
+   <script>
+    
 $(document).ready(function() {
     $('.row-number').each(function(index) {
         $(this).text(index + 1);
     });
 
-
+    
 
     $(".ansbutton").click(function(){
-    var questions = @json($examQuestions);
+    var questions = @json($examqs);
     var qid = $(this).attr('data-id');
 
     var html = '';
-    console.log(questions);
 
     for(let i = 0; i<questions.length; i++){
 
@@ -108,7 +107,9 @@ $(document).ready(function() {
     $(".showanswers").html(html);
 });
 
-}); 
+});
 
-    </script>
+
+   </script>
+ 
 @endsection

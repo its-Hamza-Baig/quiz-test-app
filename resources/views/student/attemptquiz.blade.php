@@ -59,9 +59,8 @@
                     <h2>no question available</h2>
                         
                     @endif
-                {{-- {{$qna}} --}}
                 @else
-                <h3 style="color: red" class="text-center">{{ $msg }}</h3>
+                <h3 style="color: rgb(216, 103, 103)" class="text-center">{{ $msg }}</h3>
                     
                 @endif
                     

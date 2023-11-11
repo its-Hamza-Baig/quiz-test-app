@@ -15,7 +15,6 @@ return new class extends Migration
             $table->id();
             $table->string('exams_name');
             $table->unsignedBigInteger('subject_name');
-            $table->time('attempt_time');
             $table->integer('total_marks');
             $table->date('date');
             $table->time('time');

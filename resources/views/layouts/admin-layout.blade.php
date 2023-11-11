@@ -39,15 +39,6 @@
           <li class="{{ Request::is('logout') ? 'active' : '' }}">
             <a href="/logout"><span class="fa fa-user mr-3"></span> logout</a>
           </li>
-          {{-- <li>
-            <a href="#"><span class="fa fa-sticky-note mr-3"></span> Subcription</a>
-          </li>
-          <li>
-            <a href="#"><span class="fa fa-paper-plane mr-3"></span> Settings</a>
-          </li>
-          <li>
-            <a href="#"><span class="fa fa-paper-plane mr-3"></span> Information</a>
-          </li> --}}
         </ul>
 
     	</nav>
@@ -56,7 +47,7 @@
       <div id="content" class="p-4 p-md-5 pt-5">
         
         @yield('admin-content-area')
-		</div>
+      </div>
 
     <script src="{{ asset('js/jquery.min.js')}}"></script>
     <script src="{{ asset('js/popper.js')}}"></script>

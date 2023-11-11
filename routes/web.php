@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Authcontroller;
+use App\Http\Controllers\Photocontroller;
 use App\Http\Controllers\Admin\Admincontroller;
 use App\Http\Controllers\Student\Studentcontroller;
 use App\Http\Controllers\Admin\Addstudentcontroller;
@@ -45,15 +46,6 @@ Route::post('/reset-password', [Authcontroller::class, 'resetPassword'])->name('
 
 
 
-// ***********************  super admin routes ***********************  
-
-Route::group(['middleware' => ['web', 'SuperAdmin']], function(){
-    Route::get('/super-admin/dashboard', function () {
-        return view('/super-admin/dashboard');
-    });
-});
-
-
 
 
 //***********************   admin routes ***********************  
@@ -61,9 +53,8 @@ Route::group(['middleware' => ['web', 'SuperAdmin']], function(){
 Route::group(['middleware' => ['web', 'CheckAdmin']], function(){
 
 
-    Route::get('/admin/dashboard', function () {
-        return view('admin/dashboard');
-    });
+
+    Route::get('/admin/dashboard', [Admincontroller::class, 'dashboard']);
 
     // classes routes 
     Route::get('/classes', [Admincontroller::class, 'classesRecord'])->name('classes');
@@ -97,6 +88,11 @@ Route::group(['middleware' => ['web', 'CheckAdmin']], function(){
     Route::get('/students', [Addstudentcontroller::class, 'loadStudents'])->name('loadStudents');
     Route::post('/add-student', [Addstudentcontroller::class, 'addStudent'])->name('add-student');
     Route::post('/load-model', [Addstudentcontroller::class, 'loadModel'])->name('add-student-model');
+    Route::get('/admin/student/result/{id}', [Admincontroller::class, 'loadResult'])->name('loadResult');
+    Route::get('/student/result/{id}', [Admincontroller::class, 'loadQuiz'])->name('loadQuiz');
+
+    
+    Route::post('/photo', [Photocontroller::class, 'storePhoto'])->name('store');
 
 
 
@@ -115,16 +111,14 @@ Route::group(['middleware' => ['web', 'CheckStudent']], function(){
     Route::post('/save-exam', [Studentcontroller::class, 'saveExam'])->name('saveexam');
     Route::get('/previous-exams', [Studentcontroller::class, 'previousExams'])->name('previousExams');
     Route::get('/review-exam/{id}', [Studentcontroller::class, 'reviewExams'])->name('reviewExams');
+    Route::post('/student/photo', [Photocontroller::class, 'storePhoto'])->name('storestudentphoto');
+
+    
 
 
 
 
 
-
-
-    // Route::get('/student/dashboard', function () {
-    //     return view('student/dashboard');
-    // });
 });
 
 

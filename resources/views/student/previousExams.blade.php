@@ -17,22 +17,25 @@
     </thead>
     <tbody>
       @php
-        $id = 1;
+        $id = 0;
+        $examid = 1;
       @endphp
       @if(count($previousexams) > 0)
-      {{-- {{$previousexams}} --}}
+      
         @foreach($previousexams as $previousexam)
             
             <tr>
-              <td>{{ $id++ }}</td>
+              <td>{{ $examid++ }}</td>
               <td>{{ $previousexam['examdata']['exams_name'] }}<br></td>
               <td>{{ $previousexam['examdata']['total_marks'] }}<br></td>
               <td>{{ $previousexam->obt_marks}}</td>
               <td>{{ $previousexam['examdata']['date'] }}<br></td>
               <td>{{ $previousexam['examdata']['time'] }}<br></td>
-
-              <td><a href="/review-exam/{{ $previousexams[0]['exam_id'] }}" class="btn btn-sm btn-success">Review</a></td>
+              <td><a href="/review-exam/{{ $previousexams[$id]['exam_id'] }}" class="btn btn-sm btn-success">Review</a></td>
             </tr>
+            @php
+        $id++
+      @endphp
         @endforeach
       @else
       <tr>
@@ -50,6 +53,4 @@
 
 
       
-  {{-- @endforeach
-  @endif --}}
 @endsection

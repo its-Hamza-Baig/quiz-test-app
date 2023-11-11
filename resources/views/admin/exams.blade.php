@@ -17,7 +17,6 @@
         <th scope="col">Id</th>
         <th scope="col">Exam Name</th>
         <th scope="col">Subjects</th>
-        <th scope="col">Attempt Time</th>
         <th scope="col">Total Marks</th>
         <th scope="col">Date</th>
         <th scope="col">Time</th>
@@ -35,7 +34,6 @@
             <td>{{ $id++ }}</td>
             <td>{{ $examdata->exams_name }}</td>
             <td>{{ $examdata->subjects[0]['subject'] }}</td>
-            <td>{{ $examdata->attempt_time }}</td>
             <td>{{ $examdata->total_marks }}</td>
             <td>{{ $examdata->date }}</td>
             <td>{{ $examdata->time }} Hrs</td>
@@ -75,13 +73,11 @@
                     <!-- <label>Exam Name</label> -->
                     <input type="text" name="examName" class="w-100" placeholder="enter your Exam Name" required><br><br>
 
-                    <input type="time" name="attemptTime" class="w-100" placeholder="enter Exam Attempt Time" required><br><br>
 
                     <input type="text" name="totalMarks" class="w-100" placeholder="enter Exam total marks" required><br><br>
 
                     <!-- <label>Exam Date</label> -->
                     <input type="date" name="date" class="w-100" placeholder="enter Exam Date" required min={{ date('Y-m-d') }}><br><br>
-                    {{-- <input type="date" name="date" class="w-100" placeholder="Enter Exam Date" required min="{{ date('Y-m-d') }}"> --}}
 
                     <!-- <label>Exam Time</label> -->
                     <input type="time" name="time" class="w-100" placeholder="enter Exam Time" required><br><br>
@@ -117,7 +113,6 @@
                     <!-- <label>Exam Name</label> -->
                     <input type="text" name="examname" class="w-100" placeholder="enter your Exam Name" id="exam-name" required><br><br>
 
-                    <input type="time" name="attemptTime" id="attemptTime"  class="w-100" placeholder="enter Exam Attempt Time" required><br><br>
 
                     <input type="text" name="totalMarks" id="totalMarks" class="w-100" placeholder="enter Exam total marks" required><br><br>
                     <!-- <label>Exam Date</label> -->
@@ -125,7 +120,6 @@
                     <!-- <label>Exam Time</label> -->
                     <input type="time" name="time" class="w-100" placeholder="enter Exam Time" id="exam-time" required><br><br>
 
-                    {{-- <input type="hidden" name="subjectid" id="subjectid"> --}}
 
                 </div>
                 <div class="modal-footer">
@@ -165,13 +159,10 @@
 
 
   <script>
-       // Get the current URL
 let url = window.location.href;
 
-// Split the URL by "/"
 let urlParts = url.split('/');
 
-// The class ID will be the last part of the URL
 let subjectID = urlParts[urlParts.length - 1];
 
 console.log(subjectID);
@@ -187,14 +178,12 @@ $(document).ready(function(){
     $(".edit-button").click(function(){
         var examid = $(this).attr("data-id");
         var examname = $(this).attr("data-exam");
-        var attemptTime = $(this).attr("data-attempt-time");
         var totalMarks = $(this).attr("data-tMarks");
         var examdate = $(this).attr("data-date");
         var examtime = $(this).attr("data-time");
 
         $("#examid").val(examid);
         $("#exam-name").val(examname);
-        $("#attemptTime").val(attemptTime);
         $("#totalMarks").val(totalMarks);
         $("#exam-date").val(examdate);
         $("#exam-time").val(examtime);

@@ -22,12 +22,7 @@
         </div>
 	  		<h1><a href="index.html" class="logo">Project Name</a></h1>
         <ul class="list-unstyled components mb-5">
-          {{-- <li class="active">
-            <a href="/dashboard"><span class="fa fa-home mr-3"></span> profile</a>
-          </li> --}}
-          {{-- <li>
-              <a href="/classes"><span class="fa fa-user mr-3"></span> class</a>
-          </li> --}}
+          
           <li>
             <a href="/logout"><span class="fa fa-sticky-note mr-3"></span> logout</a>
           </li>

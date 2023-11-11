@@ -4,13 +4,14 @@ namespace App\Http\Controllers\Student;
 
 use auth;
 use App\Models\exam;
-use App\Models\Result;
-use App\Models\exams_attempt;
+use App\Models\Image;
 use App\Models\Answer;
+use App\Models\Result;
 use App\Models\Classes;
 use App\Models\Question;
 use App\Models\Subjects;
 use Illuminate\Http\Request;
+use App\Models\exams_attempt;
 use Illuminate\Support\Carbon;
 use App\Http\Controllers\Controller;
 
@@ -25,47 +26,27 @@ class Studentcontroller extends Controller
     }
 
     public function loadDashboard(){
+        $userid = auth()->user()->id;
         $studentclassid = auth()->user()->class_id;
+        $photo = Image::where('user_id', $userid)->get();
          
         $classesList = Classes::where('id', $studentclassid)->with('subjects')->get();
 
-        return view('student.dashboard', compact('classesList'));
+        return view('student.dashboard', compact('classesList', 'photo'));
     }
 
-    // public function loadExams(){
-    //     $userclassid = auth()->user()->class_id;
-    //     $usersubject = Subjects::where('class_id', $userclassid)->pluck('id');
-
-    
-    //     $examdata = exam::whereIn('subject_name', $usersubject)->with('subjects')->get();
-
-    //     $resultexam = Result::count('exam_id', $examdata[0]['id']);
-
-
-    //     $exams = Exam::whereNotIn('id', function($query) {
-    //         $query->select('exam_id')
-    //             ->from('results')
-    //             ->where('user_id', auth()->user()->id); // Assuming student_id is the column that links results to students
-    //     })->get();
-    //     return $exams;
-        
-
-
-    //     return view('student.showExams', compact('examdata','resultexam'));
-    // }
+  
     public function loadExams(){
         $userclassid = auth()->user()->class_id;
         $usersubject = Subjects::where('class_id', $userclassid)->pluck('id');
     
         $examdata = exam::whereIn('subject_name', $usersubject)->with('subjects')->get();
     
-        // Assuming you want to check if a specific exam has been attempted
         $resultexamIds = Result::where('user_id', auth()->user()->id)->pluck('exam_id')->toArray();
     
         $exams = $examdata->reject(function ($exam) use ($resultexamIds) {
             return in_array($exam->id, $resultexamIds);
         });
-    // return $exams;
         return view('student.showExams', compact('exams', 'examdata'));
     }
     
@@ -130,12 +111,8 @@ class Studentcontroller extends Controller
 
         ]);
 
-        return $questionIds;
-        // $saveanswers = StudentAnswers::create([
-        //     'user_id' => $userid,
-        //     'exam_id' => $examid;
-        //     'question_id' => 
-        // ])
+        // return $questionIds;
+        
         return redirect('/previous-exams');
     }
     
@@ -150,9 +127,7 @@ class Studentcontroller extends Controller
     }
 
     public function reviewExams(Request $request, $id){
-        // return $id;
         $examQuestions = Question::where('exam_id', $id)->with('answers')->get();
-        // return $examQuestions;
         return view('student.reviewexam', compact('examQuestions'));
     }
 }

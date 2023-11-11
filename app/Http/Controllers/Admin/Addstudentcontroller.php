@@ -21,7 +21,6 @@ class Addstudentcontroller extends Controller
         $user_id = auth()->user()->id;
         $studentdata = User::where('admin_id', $user_id)->with('classname')->get();
 
-        // $classesList = Classes::where('user_id', $user_id);
         $classesList = Classes::where('user_id', $user_id)->get();
 
 
@@ -39,6 +38,7 @@ class Addstudentcontroller extends Controller
             'username' => $request->username,
             'email' => $request->email,
             'password' => Hash::make($password),
+            'role' => 'student',
             'admin_id' => $user_id,
             'class_id' => $request->class_id,
         ]);

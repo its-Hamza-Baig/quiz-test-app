@@ -107,18 +107,7 @@
 	<script src="{{ asset('login/vendor/countdowntime/countdowntime.js')}}"></script>
 <!--===============================================================================================-->
 	<script src="{{ asset('login/js/main.js')}}"></script>
-	{{-- <script>
-		if (errors) {
-                    setTimeout(function() {
-                        errors.remove();
-                    }, 2000); // Remove after 2 seconds (2000 milliseconds)
-                }
-				if (success) {
-                    setTimeout(function() {
-                        success.remove();
-                    }, 2000); // Remove after 2 seconds (2000 milliseconds)
-                }
-	</script> --}}
+	
 
 </body>
 </html>

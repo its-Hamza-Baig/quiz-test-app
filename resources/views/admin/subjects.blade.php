@@ -134,13 +134,10 @@
 
 
   <script>
-    // Get the current URL
 let url = window.location.href;
 
-// Split the URL by "/"
 let urlParts = url.split('/');
 
-// The class ID will be the last part of the URL
 let classID = urlParts[urlParts.length - 1];
 
 console.log(classID);

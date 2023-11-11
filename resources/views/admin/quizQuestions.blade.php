@@ -15,9 +15,6 @@
         <th scope="col">Id</th>
         <th scope="col">Question</th>
         <th scope="col">Answers</th>
-        <!-- <th scope="col">Date</th>
-        <th scope="col">Time</th>
-        <th scope="col">Show Qs & Ans</th> -->
         <th scope="col">Action</th>
       </tr>
     </thead>
@@ -186,10 +183,8 @@ $(document).ready(function() {
 
 let url = window.location.href;
 
-// Split the URL by "/"
 let urlParts = url.split('/');
 
-// The class ID will be the last part of the URL
 let examID = urlParts[urlParts.length - 1];
 
 console.log(examID);
@@ -200,7 +195,6 @@ console.log(examID);
             
             var exam_id = document.getElementById('examid');
             exam_id.value = examID;
-            // console.log(exam_id);
 
 
             var addAnswerButton = document.getElementById('addAnswer');
@@ -231,7 +225,6 @@ console.log(examID);
                 answerRadio.type = 'radio';
                 answerRadio.name = 'correct_answer';
                 answerRadio.classList.add('correctAnswer');
-                // answerRadio.value = answerCount + 1;
 
                 var removeButton = document.createElement('button');
                 removeButton.type = 'button';
@@ -274,100 +267,6 @@ console.log(examID);
         });
 
         
-        // AJAX submission
-        // document.getElementById('addQuestionForm').addEventListener('submit', function(e) {
-        //     e.preventDefault();
-
-        //     var checkIsCorrect = false;
-
-        //     for(let i = 0; i < $(".correctAnswer").length; i++){
-        //         if( $(".correctAnswer:eq("+i+")").prop('checked') == true){
-        //             checkIsCorrect = true;
-        //             // $(".correctAnswer:eq("+i+")").val( $(".correctAnswer:eq("+i+")").previous().find('input').val());
-        //             $(".correctAnswer:eq("+i+")").val($(".correctAnswer:eq("+i+")").prev().find('input[type="text"]').val());
-
-        //         }
-        //     }
-
-        //     if(checkIsCorrect){
-        //         // console.log(checkIsCorrect);
-
-        //         var formData = $(this).serialize();
-        //         $.ajax({
-        //             url:"{{ route('addQuestion')}}",
-        //             type:"POST",
-        //             data:formData,
-        //             success:function(data){
-        //                 console.log(data);
-        //                 if(data.success == true){
-        //                     location.reload;
-        //                 }else{
-        //                     alert(data.meassage);
-        //                 }
-        //             }
-        //         });
-
-        //     } 
-
-
-            
-        //     var formData = new FormData(this);
-
-        //     fetch('/your/api/endpoint', {
-        //         method: 'POST',
-        //         body: formData,
-        //     })
-        //     .then(response => response.json())
-        //     .then(data => {
-        //         // Handle response data (if needed)
-        //     })
-        //     .catch(error => console.error('Error:', error));
-        // });
-
-
-
-
-
-
-
-
-
-
-//         document.getElementById('addQuestionForm').addEventListener('submit', function(e) {
-//     e.preventDefault();
-
-//     var checkIsCorrect = false;
-
-//     for (let i = 0; i < $(".correctAnswer").length; i++) {
-//         // console.log($(".correctAnswer:eq(" + i + ")").prop('checked'));
-
-//         if ($(".correctAnswer:eq(" + i + ")").prop('checked') == true) {
-//             checkIsCorrect = true;
-//             $(".correctAnswer:eq(" + i + ")").val($(".correctAnswer:eq(" + i + ")").prev().find('input[type="text"]').val());
-//         }
-//     }
-
-//     if (checkIsCorrect) {
-//         var formData = $(this).serialize();
-//         $.ajax({
-//             url: "{{ route('addQuestion')}}",
-//             type: "POST",
-//             data: formData,
-//             success: function(data) {
-//                 console.log(data);
-//                 if (data.success == true) {
-//                     location.reload;
-//                 } else {
-//                     alert(data.meassage);
-//                 }
-//             }
-//         });
-//     }
-// });
-
-
-
-
 
 document.getElementById('addQuestionForm').addEventListener('submit', function(e) {
     e.preventDefault();
@@ -376,31 +275,13 @@ document.getElementById('addQuestionForm').addEventListener('submit', function(e
 
     for (let i = 0; i < $(".correctAnswer").length; i++) {
         if ($(".correctAnswer:eq(" + i + ")").prop('checked') == true) {
-            // correctAnswerValue = 1; // Set value to 1 for correct option
             correctAnswerValue = $(".correctAnswer:eq(" + i + ")").val($(".correctAnswer:eq(" + i + ")").prev().find('input[type="text"]').val());
 
         }
     }
 
     if (correctAnswerValue !== undefined) {
-        // Add your code to handle the correctAnswerValue here
-
-        // Assuming there's an input field with name 'correct_answer' in your form
-        // $("input[name='correct_answer']").val(correctAnswerValue);
-
-        // var formData = $(this).serialize();
-        // $.ajax({
-        //     url: "{{ route('addQuestion')}}",
-        //     type: "POST",
-        //     data: formData,
-        //     success: function(data) {
-        //         console.log(data);
-        //         if (data.success == true) {
-        //             location.reload();
-        //         }
-        //     }
-        // });
-
+       
         this.submit();
     }
 });

@@ -11,7 +11,6 @@ class exam extends Model
     protected $fillable = [
         'exams_name',
         'subject_name',
-        'attempt_time',
         'total_answer',
         'date',
         'time',

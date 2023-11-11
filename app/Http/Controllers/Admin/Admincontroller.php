@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\exam;
+use App\Models\Image;
 use App\Models\Answer;
+use App\Models\Result;
 use App\Models\Classes;
 use App\Models\Question;
 use App\Models\Subjects;
@@ -13,6 +15,16 @@ use App\Http\Controllers\Controller;
 
 class Admincontroller extends Controller
 {
+
+
+    public function dashboard(){
+        $id =  auth()->user()->id;
+        $photo = Image::where('user_id', $id)->get();
+        return view('admin.dashboard', compact('photo'));
+    }
+
+
+
 
     public function classesRecord(){
         $userid = auth()->user()->id;
@@ -58,20 +70,13 @@ class Admincontroller extends Controller
         return redirect("/classes");
 
     }
-
-    // class functoin complete 
-
-    // start of subjects function 
+ 
 
     public function subjectsRecords(Request $request, $id){
         $id = request('id');
 
         $subject_data = Subjects::where('class_id', $id)->get();
 
-        // if($subject_data->isEmpty()){
-        //     // If there are no records for the given class_id
-        //     return redirect('/classes/subjects')->with('error', 'No records found');
-        // }
 
         return view('admin.subjects', compact('subject_data'));
 
@@ -122,7 +127,6 @@ class Admincontroller extends Controller
         $addexam = new exam;
         $addexam->exams_name = $request->examName;
         $addexam->subject_name = $request->subjectid;
-        $addexam->attempt_time = $request->attemptTime;
         $addexam->total_marks = $request->totalMarks;
         $addexam->date = $request->date;
         $addexam->time = $request->time;
@@ -132,11 +136,9 @@ class Admincontroller extends Controller
     }
 
     public function updateExams(Request $request){
-        // return $request;
         $examData = exam::find($request->examid);
 
         $examData->exams_name = $request->examname;
-        $examData->attempt_time = $request->attemptTime;
         $examData->total_marks = $request->totalMarks;
         $examData->date = $request->date;
         $examData->time = $request->time;
@@ -145,25 +147,13 @@ class Admincontroller extends Controller
         return back();
     }
 
-    // public function deleteExams(Request $request){
-    //     $deleteExam = exam::find($request->id);
-    //     // Delete associated questions and answers
-    //     $deleteExam->questions()->delete();
-    //     // Alternatively, you can use $exam->questions()->delete() to remove the associated answers as well.
     
-    //     // Delete the exam itself
-    //     $deleteExam->delete();
-    //     $deleteExam->delete();
-    //     return back();
-    // }
     public function deleteExams(Request $request){
         $deleteExam = Exam::find($request->id);
     
         if ($deleteExam) {
-            // Delete associated questions and answers
             $deleteExam->questions()->delete();
     
-            // Delete the exam itself
             $deleteExam->delete();
     
             return back()->with('success', 'Exam, questions, and answers deleted successfully.');
@@ -186,17 +176,7 @@ class Admincontroller extends Controller
     
 
     public function addQuestion(Request $request){
-        // $new_question = new Question;
-
-        // $new_question->question = $request->question;
-        // $new_question->exam_id = $request->examid;
-
-        // $new_question->save();
-
-
-        // return back();
-        // return response()->json($request->all());
-
+        
         $questionId = Question::insertGetId([
             'question' =>$request->question,
             'exam_id' =>$request->examid
@@ -224,5 +204,20 @@ class Admincontroller extends Controller
         return back();
 
     }
+
+    public function loadResult(Request $request, $id){
+        $getexams = Result::where('user_id', $id)->with('examdata')->get();
+        return view('admin.studentResults', compact('getexams'));
+    }
+
+
+    public function loadQuiz(Request $request, $id){
+        $examqs = Question::where('exam_id', $id)->with('answers')->get();
+        return view('admin.attamptedQuiz', compact('examqs'));
+    }
+
+
+
+    
     
 }
